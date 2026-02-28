@@ -36,7 +36,42 @@ async def analyze_text(input: TextInput):
         model="llama-3.3-70b-versatile",
         messages=[{
             "role": "user",
-            "content": f"""You are an expert AI content detector. Analyze the following text and determine if it is AI-generated or written by a human.
+            "content": f"""You are a highly specialized AI content detection expert trained on thousands of AI-generated and human-written texts. Your detection must be STRICT and ACCURATE.
+
+IMPORTANT RULES:
+- Be STRICT and critical in your analysis
+- Most well-structured, fluent, and perfectly formatted text is AI-generated
+- Do NOT be generous with authenticity scores
+- If in doubt, lean towards AI-GENERATED
+
+AI-generated text typically has these patterns:
+- Overly structured or perfectly balanced sentences
+- Lack of personal opinions, emotions, or real experiences
+- Repetitive sentence length and rhythm
+- Generic vocabulary with no slang or personality
+- No grammatical quirks or natural errors
+- Unnaturally smooth transitions between ideas
+- Vague statements without specific personal details
+- Overuse of words like "furthermore", "additionally", "it is important to note", "in conclusion"
+- Too many examples listed in perfect parallel structure
+- Balanced pros and cons without personal bias
+
+Human-written text typically has:
+- Irregular sentence lengths and structure
+- Personal anecdotes or specific real-world references
+- Emotional language or strong personal opinions
+- Minor grammatical mistakes or informal tone
+- Unique or unusual vocabulary choices
+- Abrupt topic shifts or tangents
+- Specific names, dates, or personal experiences
+- Incomplete thoughts or run-on sentences
+
+SCORING GUIDE:
+- authenticity_score 0-30: Almost certainly AI-generated
+- authenticity_score 31-50: Likely AI-generated
+- authenticity_score 51-70: Uncertain, mixed signals
+- authenticity_score 71-85: Likely human-written
+- authenticity_score 86-100: Almost certainly human-written
 
 Return ONLY a valid JSON object with exactly these fields (no extra text, no markdown, no backticks):
 {{
@@ -93,7 +128,38 @@ async def analyze_image(file: UploadFile = File(...)):
             "content": [
                 {
                     "type": "text",
-                    "text": """You are an expert AI image detector. Analyze this image for signs of AI generation or manipulation.
+                    "text": """You are a highly specialized AI image detection expert. Your detection must be STRICT and ACCURATE.
+
+IMPORTANT RULES:
+- Be STRICT and critical in your analysis
+- Look carefully for any signs of AI generation or manipulation
+- Do NOT be generous with authenticity scores
+- If in doubt, lean towards AI-GENERATED
+
+AI-generated images typically have:
+- Unnaturally smooth skin or textures
+- Strange or deformed hands/fingers
+- Inconsistent lighting or shadows
+- Blurry or distorted background elements
+- Perfect symmetry that looks unnatural
+- Text in image that is garbled or nonsensical
+- Eyes that look glassy or too perfect
+- Artifacts around hair or edges of objects
+
+Real/authentic images typically have:
+- Natural imperfections and noise
+- Consistent lighting throughout
+- Realistic textures with natural variation
+- Normal human features with slight asymmetry
+- Clear and readable text if present
+- Natural background details
+
+SCORING GUIDE:
+- authenticity_score 0-30: Almost certainly AI-generated
+- authenticity_score 31-50: Likely AI-generated
+- authenticity_score 51-70: Uncertain, mixed signals
+- authenticity_score 71-85: Likely real/authentic
+- authenticity_score 86-100: Almost certainly real/authentic
 
 Return ONLY a valid JSON object with exactly these fields (no extra text, no markdown, no backticks):
 {
