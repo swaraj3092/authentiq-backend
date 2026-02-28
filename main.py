@@ -51,7 +51,7 @@ Return ONLY a valid JSON object with exactly these fields (no extra text, no mar
 Text to analyze:
 {input.text}"""
         }],
-        temperature=0.3,
+        temperature=0.1,
     )
 
     raw = response.choices[0].message.content.strip()
@@ -113,7 +113,7 @@ Return ONLY a valid JSON object with exactly these fields (no extra text, no mar
                 }
             ]
         }],
-        temperature=0.3,
+        temperature=0.1,
     )
 
     raw = response.choices[0].message.content.strip()
